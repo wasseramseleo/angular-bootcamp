@@ -1,0 +1,32 @@
+{
+  "orders": [
+    {
+      "id": 1,
+      "customerName": "Global Tech Inc.",
+      "status": "Shipped",
+      "amount": 2500.75,
+      "orderDate": "2024-07-15T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "customerName": "Innovate Solutions",
+      "status": "Pending",
+      "amount": 850.00,
+      "orderDate": "2024-07-16T14:00:00Z"
+    },
+    {
+      "id": 3,
+      "customerName": "Quantum Logistics",
+      "status": "Delivered",
+      "amount": 5300.50,
+      "orderDate": "2024-07-12T09:00:00Z"
+    },
+    {
+      "id": 4,
+      "customerName": "Vertex Industries",
+      "status": "Processing",
+      "amount": 120.99,
+      "orderDate": "2024-07-17T11:45:00Z"
+    }
+  ]
+}
