@@ -1,0 +1,14 @@
+:host {
+    display: block;
+    width: 100%;
+    background-color: #f8fafc; /* Very light gray */
+    color: #475569; /* Medium gray text */
+    text-align: center;
+    padding: 1rem;
+    border-top: 1px solid #e2e8f0; /* Subtle top border */
+    margin-top: auto; /* Pushes the footer to the bottom */
+}
+p {
+    margin: 0;
+    font-size: 0.875rem;
+}
