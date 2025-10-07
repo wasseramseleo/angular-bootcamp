@@ -1,59 +1,42 @@
-# Frontend
+# Angular Bootcamp: Order Management Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
+## Beschreibung
 
-## Development server
+Dies ist das Starter-Projekt für das Angular 20 Bootcamp. Es handelt sich um eine moderne Angular-Anwendung, die mit Standalone Components aufgebaut ist und eine grundlegende Layout-Struktur für ein "Order Management Dashboard" bereitstellt.
 
-To start a local development server, run:
+Die Teilnehmer werden auf dieser Basis aufbauen, um CRUD-Funktionalität zu implementieren, wobei Signals für das State Management und moderne Angular Best Practices genutzt werden.
 
-```bash
-ng serve
-```
+## Installation
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+1.  Navigieren Sie in dieses Frontend-Projektverzeichnis.
+2.  Installieren Sie die erforderlichen Dependencies mit npm:
+    ```bash
+    npm install
+    ```
 
-## Code scaffolding
+## Entwicklungsserver
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1.  Führen Sie `ng serve` in diesem Verzeichnis aus, um den Entwicklungsserver zu starten.
+2.  Öffnen Sie `http://localhost:4200/` im Browser. Die Anwendung lädt automatisch neu, wenn Sie Änderungen an den Quelldateien vornehmen.
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Projektstruktur
 
-```bash
-ng generate --help
-```
+Dieses Projekt folgt der Standardstruktur der Angular CLI, wurde jedoch um einige spezifische Ordner für mehr Übersichtlichkeit erweitert.
 
-## Building
+-   `llm/`: Dieses Verzeichnis enthält sprachspezifische Coding-Guidelines für große Sprachmodelle (LLMs). Dies dient der Verwaltung von Prompting und Konventionen für die KI-gestützte Entwicklung.
 
-To build the project run:
+-   `src/app/`: Der Haupt-Quellcode-Ordner der Anwendung.
+    -   `component/`: Enthält alle Standalone UI Components.
+        -   `header.ts`: Der Header der Anwendung.
+        -   `footer.ts`: Der Footer der Anwendung.
+    -   `model/`: Enthält TypeScript Interfaces und Typ-Definitionen, die die Daten unserer Anwendung modellieren.
+        -   `order.ts`: Definiert das `Order` Interface.
+    -   `service/`: Enthält `injectable` Services, die Geschäftslogik, Datenzugriff und andere geteilte Funktionalitäten behandeln.
+        -   `order.service.ts`: Ein Platzhalter-Service für die Verwaltung der Bestelldaten.
 
-```bash
-ng build
-```
+### Kerndateien
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+-   `src/app/app.ts`: Die Root Component der Anwendung. Sie setzt das Hauptlayout zusammen, indem sie die `HeaderComponent` und `FooterComponent` importiert und verwendet.
+-   `src/styles.css`: Globale Styles und CSS-Resets.

@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'app-header',
   imports: [],
-  templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css',
+  templateUrl: './header.html',
+  styleUrl: './header.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FooterComponent {
+export class Header {
 
 }
