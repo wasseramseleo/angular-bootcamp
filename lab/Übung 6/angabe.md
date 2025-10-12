@@ -13,13 +13,14 @@ Bisher kann unser Service nur die gesamte Liste an Bestellungen abrufen. Für ei
 **Angabe:**
 
 1.  Öffnen Sie `src/app/service/order.service.ts`.
-2.  Erstellen Sie eine neue, öffentliche Methode namens `getOrderById`.
-3.  Diese Methode soll eine `id` als Parameter akzeptieren (vom Typ `string` oder `number`).
-4.  Die Methode soll ein `Observable<Order>` zurückgeben.
-5.  Implementieren Sie die Methode so, dass sie einen HTTP `GET`-Request an den spezifischen Endpunkt für eine einzelne Bestellung sendet (z.B. `http://localhost:3000/orders/101`). Nutzen Sie dazu Template-Literale, um die ID in die `apiUrl` einzufügen.
+2.  Erstellen Sie eine neue, öffentliche Methode namens `getOrderById`, welche eine `id` als Parameter akzeptieren (vom Typ `string` oder `number`). 
+3. Die Methode soll ein `Observable<Order>` zurückgeben. 
+4. Implementieren Sie die Methode so, dass sie einen HTTP `GET`-Request an den spezifischen Endpunkt für eine einzelne Bestellung sendet (z.B. `http://localhost:3000/orders/101`). Nutzen Sie dazu Template-Literale, um die ID in die `apiUrl` einzufügen.
 
 <details>
 <summary>Lösungshinweis</summary>
+
+**`order-service.ts`:**
 
 ```typescript
 // ... imports
@@ -53,15 +54,14 @@ Diese neue Komponente wird für die Anzeige der Details einer einzelnen, über d
 
 **Angabe:**
 
-1.  Generieren Sie eine neue Komponente mit dem Namen `order-detail-page` im Verzeichnis `src/app/pages`.
-2.  Öffnen Sie die neue Datei `order-detail-page.ts`.
-3.  Injizieren Sie den `ActivatedRoute`-Service von `@angular/router` und Ihren `OrderService`. Der `ActivatedRoute`-Service enthält Informationen über die aktuell aktive Route, einschließlich der URL-Parameter.
-4.  Erstellen Sie ein Signal in Ihrer Komponente, das die geladene Bestellung halten soll, z.B. `order = signal<Order | undefined>(undefined)`.
-5.  Greifen Sie im `constructor` auf `this.route.params` zu. Dies ist ein Observable, das die Routen-Parameter (wie `:id`) enthält. Abonnieren Sie es mit `.subscribe()`.
-6.  Innerhalb der Subscription erhalten Sie die Parameter. Extrahieren Sie die `id`.
-7.  Rufen Sie mit dieser `id` Ihre neue `getOrderById`-Methode im `OrderService` auf.
-8.  Da dies ebenfalls ein Observable zurückgibt, abonnieren Sie auch dieses und setzen Sie im Erfolgsfall den Wert Ihres `order`-Signals mit den empfangenen Daten.
-9.  Erstellen Sie ein einfaches Template in `order-detail-page.html`, das die Details der Bestellung anzeigt. Verwenden Sie einen `@if`-Block, um den Inhalt nur dann zu rendern, wenn das `order`-Signal einen Wert hat.
+1.  Generieren Sie eine neue Komponente mit dem Namen `order-detail-page` im Verzeichnis `src/app/pages`. 
+2. In `order-detail-page.ts` injizieren Sie den `ActivatedRoute`-Service von `@angular/router` und Ihren `OrderService`. Der `ActivatedRoute`-Service enthält Informationen über die aktuell aktive Route, einschließlich der URL-Parameter. 
+3. Erstellen Sie ein Signal in Ihrer Komponente, das die geladene Bestellung halten soll, z.B. `order = signal<Order | undefined>(undefined)`. 
+4. Greifen Sie im `constructor` auf `this.route.params` zu. Dies ist ein Observable, das die Routen-Parameter (wie `:id`) enthält. Abonnieren Sie es mit `.subscribe()`. 
+5. Innerhalb der Subscription erhalten Sie die Parameter. Extrahieren Sie die `id`. 
+6. Rufen Sie mit dieser `id` Ihre neue `getOrderById`-Methode im `OrderService` auf. 
+7. Da dies ebenfalls ein Observable zurückgibt, abonnieren Sie auch dieses und setzen Sie im Erfolgsfall den Wert Ihres `order`-Signals mit den empfangenen Daten. 
+8. Erstellen Sie ein einfaches Template in `order-detail-page.html`, das die Details der Bestellung anzeigt. Verwenden Sie einen `@if`-Block, um den Inhalt nur dann zu rendern, wenn das `order`-Signal einen Wert hat.
 
 <details>
 <summary>Lösungshinweis</summary>
@@ -103,16 +103,53 @@ export class OrderDetailPage {
 **`order-detail-page.html`:**
 
 ```html
-@if (order(); as orderData) {
-  <div class="detail-container">
+<div class="detail-container">
+  @if (order(); as orderData) {
     <h1>Details für Bestellung #{{ orderData.id }}</h1>
     <p><strong>Kunde:</strong> {{ orderData.customerName }}</p>
-    <p><strong>Betrag:</strong> {{ orderData.amount | currency:'EUR' }}</p>
+    <p><strong>Betrag:</strong> {{ orderData.amount }}</p>
     <p><strong>Status:</strong> {{ orderData.status }}</p>
-  </div>
-} @else {
-  <p>Lade Bestelldetails...</p>
+  } @else {
+    <p>Lade Bestelldetails...</p>
+  }
+</div>
+```
+
+**`order-detail-page.css`:**
+
+```css
+.detail-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
+
+.detail-container h1 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    color: #343a40;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 1rem;
+}
+
+.detail-container p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0.75rem 0;
+    color: #495057;
+}
+
+.detail-container p strong {
+    color: #212529;
+    margin-right: 0.5rem;
+    font-weight: 600;
+}
+
 ```
 
 </details>
@@ -153,27 +190,42 @@ export const routes: Routes = [
 ```html
 <main>
   <router-outlet></router-outlet>
-  
-  </main>
+</main>
 ```
 
 **`order-list.html`:**
 
 ```html
-<div class="list-container">
-  @for (order of orders(); track order.id) {
+<!-- ... -->
+@for (order of orders(); track order.id) {
     <a [routerLink]="['/order', order.id]" class="order-link">
-      <app-order-card 
-        [order]="order"
-        (selected)="orderSelected.emit($event)">
-      </app-order-card>
+      <app-order-card [order]="order" (click)="onOrderCardClicked(order)"></app-order-card>
     </a>
-  }
-</div>
+}
+<!-- ... -->
 ```
 
 *Optional: Fügen Sie in `order-list.css` `a.order-link { text-decoration: none; color: inherit; }` hinzu, um die Standard-Link-Styles zu entfernen.*
 
+**`order-list.css`:**
+
+```css
+.list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
+    gap: 1rem;
+}
+
+.order-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+```
 </details>
 
 -----
