@@ -2,7 +2,7 @@
 
 **Ziel:** In dieser Übung vollenden wir unsere Kernfunktionalität. Wir werden eine dedizierte `OrderList`-Komponente erstellen, die mithilfe des `@for`-Blocks eine dynamische Liste von `OrderCard`-Komponenten rendert. Außerdem implementieren wir den vollständigen reaktiven Datenfluss, sodass ein Klick auf eine Karte die Auswahl im Dashboard aktualisiert.
 
-**Voraussetzungen:** Ihr Projekt ist auf dem Stand der Übung 3. Der `ng serve` kann gestartet werden.
+**Voraussetzungen:** Ihr Projekt ist auf dem Stand der Übung 3.
 
 -----
 
