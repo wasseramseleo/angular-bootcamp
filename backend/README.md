@@ -2,7 +2,7 @@
 
 ## Beschreibung
 
-Dies ist ein einfacher Mock-API-Server, der mit Node.js/Express für das Angular 20 Bootcamp erstellt wurde. Er simuliert ein Backend, indem er RESTful Endpoints für CRUD-Operationen (Create, Read, Update, Delete) auf einer Liste von Bestellungen (Orders) bereitstellt, die in einer `db.json`-Datei gespeichert sind.
+Dies ist ein einfacher Mock-API-Server, der mit Node.js/Express für das Angular 20 Grundkurs erstellt wurde. Er simuliert ein Backend, indem er RESTful Endpoints für CRUD-Operationen (Create, Read, Update, Delete) auf einer Liste von Bestellungen (Orders) bereitstellt, die in einer `db.json`-Datei gespeichert sind.
 
 Dieser Server ist für die lokale Entwicklung und für Schulungszwecke vorgesehen.
 

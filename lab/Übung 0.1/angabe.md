@@ -28,7 +28,7 @@ Das Backend ist unsere Mock-API, die uns mit Daten versorgt.
     npm start
     ```
 
-    Sie sollten die Nachricht `Mock API server is running on http://localhost:3000` im Terminal sehen. **Lassen Sie dieses Terminal geöffnet\!**
+    Sie sollten die Nachricht `Mock API server is running on http://localhost:3000` im Terminal sehen. **Lassen Sie dieses Terminal geöffnet!**
 
 5.  **Überprüfung:** Öffnen Sie einen Webbrowser und rufen Sie die Adresse `http://localhost:3000/orders` auf. Sie sollten eine Liste von Bestellungen im JSON-Format sehen.
 
@@ -68,25 +68,23 @@ Das Frontend ist unsere Angular-Anwendung, die wir im Laufe des Kurses entwickel
 
 Jetzt, wo alles läuft, ändern wir eine Kleinigkeit im Code, um den Development-Workflow zu sehen.
 
-1.  **Component-Klasse öffnen:** Öffnen Sie die Datei `frontend/src/app/app.component.ts`.
+1.  **Component-Klasse öffnen:** Öffnen Sie die Datei `frontend/src/app/app.ts`.
 
-2.  **Property hinzufügen:** Fügen Sie eine neue Eigenschaft (Property) zur `AppComponent` Klasse hinzu.
+2.  **Property hinzufügen:** Fügen Sie eine neue Eigenschaft (Property) zur `App` Klasse hinzu.
 
     ```typescript
-    export class AppComponent {
-      title = 'order-management-dashboard';
-      bootcampName = 'Angular 20 Bootcamp'; // <-- Diese Zeile hinzufügen
+    export class App {
+      bootcampName = 'Angular 20 Grundkurs'; // <-- Diese Zeile hinzufügen
     }
     ```
 
-3.  **Template öffnen:** Öffnen Sie die zugehörige Template-Datei `frontend/src/app/app.component.html`.
+3.  **Template öffnen:** Öffnen Sie die zugehörige Template-Datei `frontend/src/app/app.html`.
 
 4.  **Interpolation verwenden:** Ändern Sie die `<h2>`-Überschrift so ab, dass sie die neue Eigenschaft aus der Klasse verwendet.
 
     ```html
-    <h2>Welcome to the Bootcamp!</h2>
-
-    <h2>Willkommen zum {{ bootcampName }}!</h2>
+    <h2>Willkommen im {{ bootcampName }}!</h2>
+    <p>Dein Kursprojekt ist bereit.</p>
     ```
 
-5.  **Überprüfung:** Speichern Sie beide Dateien. Wechseln Sie zum Browser-Tab mit Ihrer Anwendung. Angular sollte die Seite automatisch neu geladen haben und die neue Überschrift "Willkommen zum Angular 20 Bootcamp\!" anzeigen.
+5.  **Überprüfung:** Speichern Sie beide Dateien. Wechseln Sie zum Browser-Tab mit Ihrer Anwendung. Angular sollte die Seite automatisch neu geladen haben und die neue Überschrift "Willkommen zum Angular 20 Grundkurs!" anzeigen.

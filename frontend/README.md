@@ -1,8 +1,8 @@
-# Angular Bootcamp: Order Management Dashboard
+# Angular Grundkurs: Order Management Dashboard
 
 ## Beschreibung
 
-Dies ist das Starter-Projekt für das Angular 20 Bootcamp. Es handelt sich um eine moderne Angular-Anwendung, die mit Standalone Components aufgebaut ist und eine grundlegende Layout-Struktur für ein "Order Management Dashboard" bereitstellt.
+Dies ist das Starter-Projekt für das Angular 20 Grundkurs. Es handelt sich um eine moderne Angular-Anwendung, die mit Standalone Components aufgebaut ist und eine grundlegende Layout-Struktur für ein "Order Management Dashboard" bereitstellt.
 
 Die Teilnehmer werden auf dieser Basis aufbauen, um CRUD-Funktionalität zu implementieren, wobei Signals für das State Management und moderne Angular Best Practices genutzt werden.
 

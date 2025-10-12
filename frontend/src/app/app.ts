@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import {Component} from '@angular/core';
 import {Footer} from "./component/footer/footer";
 import {Header} from "./component/header/header";
 
@@ -9,5 +9,5 @@ import {Header} from "./component/header/header";
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('frontend');
+
 }
