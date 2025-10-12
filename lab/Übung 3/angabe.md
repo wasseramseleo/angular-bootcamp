@@ -147,7 +147,7 @@ Was passiert, wenn unser `orders`-Signal im `DashboardPage` von Anfang an leer i
 <summary>Lösungshinweis</summary>
 
 ```html
-<h1>Mein Dashboard</h1>
+<h1>Dashboard</h1>
 
 @if (orders().length > 0) {
   <div class="selection-controls">

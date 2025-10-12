@@ -58,7 +58,7 @@ export class DashboardPage { /* ... */ }
 **`dashboard-page.html`:**
 
 ```html
-<h1>Mein Dashboard</h1>
+<h1>Dashboard</h1>
 
 @if (orders().length > 0) {
   <h2>Bestellübersicht</h2>

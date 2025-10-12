@@ -32,7 +32,7 @@ Die Komponente `App` dient als Haupt-Container der Anwendung. Anstatt dort direk
 **Aktion in `app.html`:**
 
 1.  Entfernen Sie den bisherigen Willkommenstext (`<h2>Willkommen...</h2>` und `<p>...</p>`).
-2.  Fügen Sie stattdessen den Selector Ihrer neuen Seiten-Komponente ein: `<app-dashboard-page></app-dashboard-page>`.
+2.  Fügen Sie stattdessen den Selector Ihrer neuen Seiten-Komponente ein: `<app-dashboard-page />`.
 
 ### **Aufgabe 3: Das Layout der Dashboard-Page gestalten**
 
@@ -40,15 +40,26 @@ Füllen Sie die Dashboard-Seite mit Leben. Sie soll eine Überschrift und die Ko
 
 **Aktion in `dashboard-page.html`:**
 
-1.  Fügen Sie eine Hauptüberschrift hinzu, z.B. `<h1>Mein Dashboard</h1>`.
+1.  Fügen Sie eine Hauptüberschrift hinzu, z.B. `<h1>Dashboard</h1>`.
 2.  Fügen Sie eine Unterüberschrift für die Bestellungsliste hinzu, z.B. `<h2>Aktuelle Bestellungen</h2>`.
-3.  Platzieren Sie den Selector der `OrderCard` (`<app-order-card></app-order-card>`) unterhalb der Überschriften.
+3.  Platzieren Sie den Selector der `OrderCard` (`<app-order-card />`) unterhalb der Überschriften.
 
 **Aktion in `dashboard-page.css`:**
 
 1.  Erstellen Sie eine Klasse (z.B. `.dashboard-container`), die Sie im HTML um Ihre Inhalte legen.
 2.  Nutzen Sie CSS Flexbox, um die `app-order-card` auf der Seite horizontal zu zentrieren.
-    * **Tipp:** `display: flex;`, `flex-direction: column;`, `align-items: center;`
+
+<details>
+  <summary>Beispielstruktur</summary>
+
+```css
+.dashboard-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+```
+</details>
 
 ### **Aufgabe 4: Die OrderCard mit statischen Daten befüllen**
 
@@ -87,6 +98,99 @@ Nutzen Sie den `:host`-Selektor, um den Container der Karte zu gestalten, und no
 * **Schriftarten**: Wählen Sie passende Schriftgrößen und -stärken für die verschiedenen Textelemente.
 * **Hover-Effekt**: Fügen Sie einen `:host:hover`-Effekt hinzu, der zum Beispiel den Schatten subtil verstärkt oder die Rahmenfarbe ändert, um Interaktivität zu signalisieren.
 
+</details>
+
+<details>
+  <summary>Beispielstyling</summary>
+
+```css
+/*
+* :host ist ein spezieller Selektor, der das Host-Element der Komponente
+* selbst stylt – in unserem Fall das <app-order-card>-Tag.
+  */
+  :host {
+  /*
+  * 'display: block' ist wichtig, damit das Element wie ein Container behandelt
+  * wird und Eigenschaften wie 'width' und 'margin' korrekt angewendet werden.
+  */
+  display: block;
+  width: 400px; /* Eine feste Breite für eine konsistente Darstellung. */
+  border: 1px solid #e0e0e0; /* Ein dezenter, hellgrauer Rahmen. */
+  border-radius: 8px; /* Moderne, abgerundete Ecken. */
+  background-color: #ffffff; /* Weißer Hintergrund. */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Ein sehr subtiler Schatten für einen leichten 3D-Effekt. */
+
+  /* 'overflow: hidden' stellt sicher, dass der Hintergrund des Headers von den abgerundeten Ecken abgeschnitten wird. */
+  overflow: hidden;
+
+  /* 'transition' sorgt dafür, dass sich Änderungen (z.B. beim Hover) flüssig anfühlen. */
+  transition: all 0.2s ease-in-out;
+  }
+
+  /*
+  * Der :host:hover-Effekt wird aktiv, wenn die Maus über die Komponente bewegt wird.
+  * Er signalisiert dem Benutzer Interaktivität.
+  */
+  :host:hover {
+  cursor: pointer; /* Der Mauszeiger wird zur Hand, was Klickbarkeit anzeigt. */
+  border-color: #007bff; /* Die Rahmenfarbe ändert sich zu einem primären Blau. */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Der Schatten wird stärker, was die Karte "anhebt". */
+  transform: translateY(-2px); /* Eine leichte Bewegung nach oben verstärkt den Schwebe-Effekt. */
+  }
+
+  /* Styling für den Header-Bereich der Karte. */
+  .card-header {
+  display: flex; /* Aktiviert Flexbox für die Ausrichtung der Kind-Elemente. */
+  justify-content: space-between; /* Platziert die Elemente an den entgegengesetzten Enden. */
+  align-items: center; /* Zentriert die Elemente vertikal. */
+
+  background-color: #f8f9fa; /* Ein sehr helles Grau, um den Header visuell abzuheben. */
+  padding: 1rem; /* 16px Innenabstand. */
+  border-bottom: 1px solid #e0e0e0; /* Eine feine Linie trennt Header und Body. */
+  }
+
+  /* Styling für den Hauptinhaltsbereich der Karte. */
+  .card-body {
+  padding: 1rem; /* Gleicher Innenabstand wie im Header für Konsistenz. */
+  }
+
+  /*
+  * Schriftarten-Anpassungen
+  */
+
+  /* Spezifische Styles für die h3-Überschrift im Header. */
+  .card-header h3 {
+  margin: 0; /* Entfernt den Standard-Außenabstand der Überschrift. */
+  font-size: 1.15rem; /* Etwas größer als der Standardtext. */
+  color: #333;
+  }
+
+  /* Spezifische Styles für den Status-Text im Header. */
+  .card-header span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  background-color: #e9ecef;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  }
+
+  /* Styles für die Paragraphen im Body-Bereich. */
+  .card-body p {
+  margin: 0.5rem 0; /* Etwas vertikaler Abstand zwischen den Zeilen. */
+  color: #444;
+  }
+
+  /* Entfernt den überflüssigen Abstand beim ersten und letzten Paragraphen. */
+  .card-body p:first-child {
+  margin-top: 0;
+  }
+
+  .card-body p:last-child {
+  margin-bottom: 0;
+  }
+
+```
 </details>
 
 -----
