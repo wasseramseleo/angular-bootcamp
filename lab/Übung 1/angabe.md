@@ -133,7 +133,7 @@ Nutzen Sie den `:host`-Selektor, um den Container der Karte zu gestalten, und no
   */
   :host:hover {
   cursor: pointer; /* Der Mauszeiger wird zur Hand, was Klickbarkeit anzeigt. */
-  border-color: #007bff; /* Die Rahmenfarbe ändert sich zu einem primären Blau. */
+  border-color: #0f172a; /* Die Rahmenfarbe ändert sich zu einem primären Blau. */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Der Schatten wird stärker, was die Karte "anhebt". */
   transform: translateY(-2px); /* Eine leichte Bewegung nach oben verstärkt den Schwebe-Effekt. */
   }

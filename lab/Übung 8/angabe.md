@@ -2,7 +2,7 @@
 
 **Ziel:** In dieser Übung gehen wir einen Schritt über Komponenten hinaus und erstellen unsere erste eigene Attribut-Direktive. Komponenten sind dafür da, UI-Blöcke mit eigenen Templates zu erstellen. Direktiven hingegen sind dafür gedacht, das Aussehen oder Verhalten von *bestehenden* Elementen zu verändern, ohne deren Template zu beeinflussen. Unser Ziel ist es, eine wiederverwendbare Direktive zu bauen, die einer `OrderCard` beim Überfahren mit der Maus einen farbigen Rahmen gibt, der vom Bestellstatus abhängt.
 
-**Voraussetzungen:** Ihr Projekt ist auf dem Stand der Übung 7 (Reactive Forms). Das Backend ist gestartet (`npm start`).
+**Voraussetzungen:** Ihr Projekt ist auf dem Stand der Übung 7. Das Backend ist gestartet (`npm start`).
 
 -----
 
@@ -130,7 +130,7 @@ export class StatusBorderDirective {
         borderColor = 'orange';
         break;
       case OrderStatus.PROCESSING:
-        borderColor = '#007bff';
+        borderColor = '#0f172a';
         break;
       case OrderStatus.SHIPPED:
         borderColor = 'purple';

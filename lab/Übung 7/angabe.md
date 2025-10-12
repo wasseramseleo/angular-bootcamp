@@ -2,7 +2,7 @@
 
 **Ziel:** In dieser Übung erweitern wir unsere Anwendung um die Fähigkeit, neue Bestellungen zu erstellen und an das Backend zu senden. Wir werden die Grundlagen von Angulars Reactive Forms kennenlernen, indem wir ein Formular erstellen, es an ein Datenmodell binden, Validierungsregeln hinzufügen und die Daten über einen HTTP `POST`-Request an unseren Server übermitteln.
 
-**Voraussetzungen:** Ihr Projekt ist auf dem Stand der Routing-Übung (Übung 7). Das Backend ist gestartet (`npm start`).
+**Voraussetzungen:** Ihr Projekt ist auf dem Stand der Übung 6. Das Backend ist gestartet (`npm start`).
 
 -----
 
@@ -15,17 +15,13 @@ Zuerst benötigen wir eine neue Seite mit einem leeren HTML-Formular als Grundla
 1.  Generieren Sie eine neue Komponente mit dem Namen `add-order-page` im Verzeichnis `src/app/pages`.
 2.  Um Reactive Forms nutzen zu können, müssen Sie das `ReactiveFormsModule` in Ihrer neuen Komponente importieren. Fügen Sie es zum `imports`-Array des `@Component`-Decorators hinzu.
 3.  Erstellen Sie in `add-order-page.html` die grundlegende HTML-Struktur für ein Formular. Es sollte Eingabefelder (`<input>`) für `customerName` und `amount` sowie ein Auswahlfeld (`<select>`) für den `status` enthalten. Fügen Sie außerdem einen Submit-Button hinzu.
+4.  Erstellen Sie einen Menü-Punkt in der `header`-Komponente, die bei Klick auf die `add-order-page` navigiert (Nicht auf den Router `path` vergessen).
 
 <details>
 <summary>Lösungshinweis</summary>
 
-**1. Kommando zum Generieren:**
 
-```bash
-ng generate component pages/add-order-page
-```
-
-**2. & 3. `add-order-page.ts` und `add-order-page.html`:**
+**`add-order-page.ts`:**
 
 ```typescript
 import { Component } from '@angular/core';
@@ -40,6 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Wichtig: Importieren
 })
 export class AddOrderPage { }
 ```
+
+**``add-order-page.html``:**
 
 ```html
 <div class="form-container">
@@ -66,6 +64,146 @@ export class AddOrderPage { }
     <button type="submit">Bestellung speichern</button>
   </form>
 </div>
+```
+
+**``header.html``:**
+
+```html
+<header>
+  <nav>
+    <a routerLink="/">Dashboard</a>
+    <a routerLink="/add-order" routerLinkActive="active">Neue Order</a>
+  </nav>
+</header>
+```
+
+**``add-order-page.css``:**
+
+```css
+.form-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.form-container h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  color: #343a40;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.form-field label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.form-field input,
+.form-field select {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0f172a;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+button[type="submit"]:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+}
+```
+
+</details>
+
+<details>
+<summary>Header Styling</summary>
+
+**``header.css``:**
+
+```css
+:host {
+    display: block;
+    width: 100%;
+    background-color: #0f172a;
+    color: #e2e8f0;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+nav a {
+    text-decoration: none;
+    color: #94a3b8;
+    font-weight: 600;
+    padding: 0.5rem 0.25rem;
+    position: relative;
+    transition: color 0.2s ease-in-out;
+}
+
+nav a:hover {
+    color: #e2e8f0;
+}
+
+nav a.active {
+    color: #ffffff;
+}
+
+nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #38bdf8;
+}
 ```
 
 </details>
@@ -184,7 +322,7 @@ import { OrderService } from '../../service/order.service';
 export class AddOrderPage {
   private fb = inject(FormBuilder);
   private orderService = inject(OrderService);
-  private router = inject(Router); // Für Bonus-Aufgabe
+  private router = inject(Router);
 
   orderForm: FormGroup;
   // ... constructor ...
@@ -194,7 +332,7 @@ export class AddOrderPage {
       this.orderService.saveOrder(this.orderForm.value).subscribe({
         next: (savedOrder) => {
           console.log('Bestellung erfolgreich gespeichert:', savedOrder);
-          // Bonus: Zurück zur Startseite navigieren
+          // Zurück zur Startseite navigieren
           this.router.navigate(['/']);
         },
         error: (err) => console.error('Fehler beim Speichern:', err)
