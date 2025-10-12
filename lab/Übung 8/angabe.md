@@ -47,7 +47,7 @@ import { StatusBorderDirective } from '../../directives/status-border.directive'
 
 @Component({
   // ...
-  imports: [CommonModule, OrderCard, StatusBorderDirective], // Hier hinzufügen
+  imports: [OrderCard, StatusBorderDirective], // Hier hinzufügen
 })
 export class OrderList { /* ... */ }
 ```

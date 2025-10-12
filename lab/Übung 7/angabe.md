@@ -29,13 +29,12 @@ ng generate component pages/add-order-page
 
 ```typescript
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; // Wichtig: Importieren
 
 @Component({
   selector: 'app-add-order-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule], // Und hier hinzufügen
+  imports: [ReactiveFormsModule], // Und hier hinzufügen
   templateUrl: './add-order-page.html',
   styleUrls: ['./add-order-page.css']
 })

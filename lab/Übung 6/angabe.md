@@ -73,12 +73,11 @@ import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from '../../model/order.model';
 import { OrderService } from '../../service/order.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-order-detail-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './order-detail-page.html',
   styleUrls: ['./order-detail-page.css']
 })

@@ -62,6 +62,8 @@ Was passiert, wenn unser `orders`-Signal im `DashboardPage` von Anfang an leer i
 <details>
 <summary>Lösungshinweis</summary>
 
+**`dashboard-page.html`:**
+
 ```html
 <div class="dashboard-container">
   <h1>Dashboard</h1>
@@ -96,8 +98,10 @@ Nun nutzen wir das Signal `selectedOrder` um ein Output-Event der `OrderCard` ab
 <details>
 <summary>Lösungshinweis</summary>
 
+**`dashboard-page.ts`:**
+
+
 ```typescript
-// dashboard-page.ts
 export class DashboardPage {
   //...
   onOrderCardClicked(order: Order) {
@@ -106,8 +110,10 @@ export class DashboardPage {
 }
 ```
 
+**`dashboard-page.html`:**
+
+
 ```html
-<!-- dashboard-page.html -->
 <app-order-card (click)="onOrderCardClicked(orders()[0])" [order]="orders()[0]" />
 ```
 
