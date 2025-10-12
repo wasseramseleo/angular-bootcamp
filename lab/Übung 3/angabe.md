@@ -99,7 +99,7 @@ Unsere `OrderCard` erhält nun echte Daten. Wir nutzen diese, um den angezeigten
 1.  Öffnen Sie `src/app/component/order-card.html`.
 2.  Suchen Sie die Zeile, die den Status anzeigt (`<span>Status: {{ displayOrder().status }}</span>`).
 3.  Ersetzen Sie diese Zeile durch einen `@switch`-Block, der den Status des `displayOrder()`-Signals prüft.
-4.  Implementieren Sie `@case`-Blöcke für die Status `Pending`, `Shipped` und `Delivered`, die jeweils einen passenden, benutzerfreundlichen Text ausgeben (z.B. "⏳ In Bearbeitung", "🚚 Versandt", "✅ Zugestellt").
+4.  Implementieren Sie `@case`-Blöcke für die Status `PENDING`, `SHIPPED` und `Delivered`, die jeweils einen passenden, benutzerfreundlichen Text ausgeben (z.B. "⏳ In Bearbeitung", "🚚 Versandt", "✅ Zugestellt").
 5.  Fügen Sie einen `@default`-Block für alle anderen Status hinzu.
 
 <details>

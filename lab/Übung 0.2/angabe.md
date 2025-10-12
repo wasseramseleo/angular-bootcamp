@@ -37,7 +37,7 @@ ng generate enum model/OrderStatus
 
 *Kurzform: `ng g enum model/OrderStatus`*
 
-**Implementierung:** Öffnen Sie die neu erstellte Datei `src/app/model/order-status.enum.ts` und befüllen Sie das Enum mit den folgenden Werten: `Pending`, `Processing`, `Shipped`, `Delivered`, `Cancelled`.
+**Implementierung:** Öffnen Sie die neu erstellte Datei `src/app/model/order-status.enum.ts` und befüllen Sie das Enum mit den folgenden Werten: `PENDING`, `Processing`, `SHIPPED`, `DELIVERED`, `CANCELED`.
 
 #### **1.3 Das `Order`-Interface anpassen**
 

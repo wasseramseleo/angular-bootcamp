@@ -126,19 +126,19 @@ export class StatusBorderDirective {
     let borderColor = 'gray'; // Standardfarbe
 
     switch (this.status()) {
-      case OrderStatus.Pending:
+      case OrderStatus.PENDING:
         borderColor = 'orange';
         break;
-      case OrderStatus.Confirmed:
-        borderColor = '#007bff'; // Blau
+      case OrderStatus.PROCESSING:
+        borderColor = '#007bff';
         break;
-      case OrderStatus.Shipped:
+      case OrderStatus.SHIPPED:
         borderColor = 'purple';
         break;
-      case OrderStatus.Delivered:
+      case OrderStatus.DELIVERED:
         borderColor = 'green';
         break;
-      case OrderStatus.Cancelled:
+      case OrderStatus.CANCELED:
         borderColor = 'red';
         break;
     }

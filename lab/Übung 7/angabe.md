@@ -60,7 +60,7 @@ export class AddOrderPage { }
       <label for="status">Status</label>
       <select id="status">
         <option value="PENDING">Pending</option>
-        <option value="CONFIRMED">Confirmed</option>
+        <option value="PROCESSING">Processing</option>
       </select>
     </div>
 
@@ -106,7 +106,7 @@ export class AddOrderPage {
     this.orderForm = this.fb.group({
       customerName: [''], // Initialwert: leerer String
       amount: [0],
-      status: [OrderStatus.Pending]
+      status: [OrderStatus.PENDING]
     });
   }
 }
@@ -130,7 +130,7 @@ export class AddOrderPage {
     <label for="status">Status</label>
     <select id="status" formControlName="status">
       <option value="PENDING">Pending</option>
-      <option value="CONFIRMED">Confirmed</option>
+      <option value="PROCESSING">Processing</option>
     </select>
   </div>
 
@@ -242,7 +242,7 @@ export class AddOrderPage {
     this.orderForm = this.fb.group({
       customerName: ['', Validators.required], // Validator hinzugefügt
       amount: [0, [Validators.required, Validators.min(0.01)]], // Mehrere Validatoren
-      status: [OrderStatus.Pending]
+      status: [OrderStatus.PENDING]
     });
   }
   // ...

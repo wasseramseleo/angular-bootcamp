@@ -1,36 +1,12 @@
 ### **Übung 2: State Management mit Signals**
 
-**Ziel:** In dieser Übung modernisieren wir unsere Anwendung, indem wir das State Management von einfachen Klassen-Eigenschaften auf Angular Signals umstellen. Wir lernen, wie man veränderbare (writable) und abgeleitete (computed) Signals erstellt und wie man eine Komponente mit einem optionalen Signal-Input für die Datenannahme vorbereitet.
+**Ziel:** In dieser Übung werden wir die Grundlagen von Angular-Komponenten in der Praxis anwenden. Wir erstellen eine neue Seiten-Komponente, schachteln unsere bestehende `OrderCard` darin und geben beiden ein sauberes, statisches Layout und Styling. Das Ziel ist es, ein Gefühl für den Aufbau und das Zusammenspiel von Komponenten zu bekommen.
 
-**Voraussetzungen:** Ihr Projekt ist auf dem Stand nach Übung 1. Der `ng serve` kann gestartet werden.
-
------
-
-### **Aufgabe 1: `OrderStatus` Enum erweitern**
-
-Um später den Status einer Bestellung besser prüfen zu können, müssen wir unser `OrderStatus`-Enum um zwei weitere Zustände erweitern.
-
-**Angabe:**
-Öffnen Sie die Datei `src/app/model/order-status.enum.ts`. Fügen Sie die beiden neuen Status `Delivered` und `Cancelled` zum Enum hinzu.
-
-<details>
-<summary>Lösungshinweis</summary>
-
-```typescript
-export enum OrderStatus {
-  Pending = 'PENDING',
-  Confirmed = 'CONFIRMED',
-  Shipped = 'SHIPPED',
-  Delivered = 'DELIVERED', // Hinzugefügt
-  Cancelled = 'CANCELLED', // Hinzugefügt
-}
-```
-
-</details>
+**Voraussetzungen:** Ihr Projekt ist auf dem Stand nach Übung 1.
 
 -----
 
-### **Aufgabe 2: Den State in `DashboardPage` auf Signals umstellen**
+### **Aufgabe 1: Den State in `DashboardPage` auf Signals umstellen**
 
 Wir beginnen damit, den lokalen Zustand unserer `DashboardPage` reaktiv zu machen.
 
@@ -38,7 +14,7 @@ Wir beginnen damit, den lokalen Zustand unserer `DashboardPage` reaktiv zu mache
 
 1.  Öffnen Sie `src/app/pages/dashboard-page.ts`.
 2.  Importieren Sie `signal` aus `@angular/core`.
-3.  Wandeln Sie die Klassen-Eigenschaft `orders` in ein `signal` um. Initialisieren Sie es direkt mit dem bestehenden Array von Mock-Bestellungen.
+3.  Erstellen Sie die Klassen-Eigenschaft `orders` als `signal`. Initialisieren Sie es direkt mit 3 Mock-Bestellungen.
 4.  Erstellen Sie ein neues `signal` namens `selectedOrder`. Es soll eine einzelne `Order` oder `undefined` halten können und mit `undefined` initialisiert werden.
 
 <details>
@@ -54,15 +30,13 @@ import { OrderStatus } from '../../model/order-status.enum';
 export class DashboardPage {
   // 1. 'orders' ist jetzt ein Writable Signal
   orders = signal<Order[]>([
-    { id: 101, customerName: 'ACME Corp', amount: 250.50, status: OrderStatus.Confirmed },
-    { id: 102, customerName: 'Globex Inc.', amount: 1200.00, status: OrderStatus.Shipped },
-    { id: 103, customerName: 'Cyberdyne', amount: 80.00, status: OrderStatus.Pending }
+    { id: 101, customerName: 'Manner GmbH', amount: 250.50, status: OrderStatus.DELIVERED, orderDate: "2024-07-15T10:30:00Z"},
+    { id: 102, customerName: 'BitPanda GmbH', amount: 1200.00, status: OrderStatus.SHIPPED, orderDate: "2024-07-15T10:30:00Z" },
+    { id: 103, customerName: 'Puch OG', amount: 80.00, status: OrderStatus.PENDING, orderDate: "2024-07-15T10:30:00Z" }
   ]);
   
   // 2. 'selectedOrder' ist ein neues Writable Signal
   selectedOrder = signal<Order | undefined>(undefined);
-
-  // Der Rest der Klasse...
 }
 ```
 
@@ -70,7 +44,7 @@ export class DashboardPage {
 
 -----
 
-### **Aufgabe 3: Ein `computed` Signal für die Zusammenfassung hinzufügen**
+### **Aufgabe 2: Ein `computed` Signal für die Zusammenfassung hinzufügen**
 
 Nun erstellen wir einen abgeleiteten Zustand, der auf Änderungen von `selectedOrder` reagiert.
 
@@ -109,15 +83,18 @@ export class DashboardPage {
 **`dashboard-page.html`:**
 
 ```html
+<!-- Restliche Struktur -->
 <h2>Aktuelle Bestellungen</h2>
-<p>{{ selectionSummary() }}</p> <app-order-card></app-order-card>
+<p>{{ selectionSummary() }}</p> 
+<app-order-card />
+<!-- Restliche Struktur -->
 ```
 
 </details>
 
 -----
 
-### **Aufgabe 4: `OrderCard` auf einen optionalen Signal-Input umstellen**
+### **Aufgabe 3: `OrderCard` auf einen optionalen Signal-Input umstellen**
 
 Jetzt bereiten wir die `OrderCard` darauf vor, Daten als Signal zu empfangen. Da wir noch kein Property Binding verwenden, stellen wir eine Fallback-Lösung für den Fall bereit, dass keine Daten übergeben werden.
 
@@ -125,7 +102,7 @@ Jetzt bereiten wir die `OrderCard` darauf vor, Daten als Signal zu empfangen. Da
 
 1.  Öffnen Sie `src/app/component/order-card.ts`.
 2.  Importieren Sie `input` und `computed` aus `@angular/core`.
-3.  Entfernen Sie den alten `@Input()`-Decorator und erstellen Sie stattdessen einen neuen optionalen Input mit der `input()`-Funktion. Nennen Sie ihn `order`. Er soll vom Typ `Order | undefined` sein.
+3.  Erstellen Sie einen neuen optionalen Input mit der `input()`-Funktion. Nennen Sie ihn `order`. Er soll vom Typ `Order | undefined` sein.
 4.  Erstellen Sie ein `computed` Signal namens `displayOrder`. Dieses Signal soll prüfen, ob der `order` Input einen Wert hat (`order()`).
     * Wenn ja, soll es diesen Wert zurückgeben.
     * Wenn nein (`undefined`), soll es ein hartcodiertes Mock-`Order`-Objekt zurückgeben, damit die Karte immer etwas anzeigt.
@@ -144,7 +121,7 @@ import { OrderStatus } from '../../model/order-status.enum';
 
 @Component({ /* ... */ })
 export class OrderCard {
-  // 1. Optionaler Signal-Input
+// 1. Optionaler Signal-Input
   order = input<Order | undefined>();
 
   // 2. Mock-Daten als Fallback
@@ -152,7 +129,8 @@ export class OrderCard {
     id: 999,
     customerName: 'Mock Customer',
     amount: 123.45,
-    status: OrderStatus.Pending
+    status: OrderStatus.PENDING,
+    orderDate: "2025-07-15T10:30:00Z"
   };
 
   // 3. Computed Signal für die Anzeige
@@ -162,6 +140,7 @@ export class OrderCard {
 
   constructor() {
     console.log('OrderCard initialized');
+    console.log(this.order());
   }
 }
 ```
@@ -183,7 +162,7 @@ export class OrderCard {
 
 -----
 
-### **Aufgabe 5: Weiteres `computed` Signal in `OrderCard`**
+### **Aufgabe 4: Weiteres `computed` Signal in `OrderCard`**
 
 Zum Abschluss erstellen wir ein weiteres abgeleitetes Signal, um zu zeigen, wie nützlich sie sind.
 
@@ -191,7 +170,7 @@ Zum Abschluss erstellen wir ein weiteres abgeleitetes Signal, um zu zeigen, wie 
 
 1.  Erstellen Sie in `order-card.ts` ein neues `computed` Signal namens `isFinished`.
 2.  Dieses Signal soll vom `displayOrder` Signal abhängen.
-3.  Es soll `true` zurückgeben, wenn der Status von `displayOrder()` entweder `OrderStatus.Delivered` oder `OrderStatus.Cancelled` ist. In allen anderen Fällen soll es `false` zurückgeben.
+3.  Es soll `true` zurückgeben, wenn der Status von `displayOrder()` entweder `OrderStatus.DELIVERED` oder `OrderStatus.CANCELED` ist. In allen anderen Fällen soll es `false` zurückgeben.
 4.  (Bonus) Zeigen Sie den Wert von `isFinished()` testweise in `order-card.html` an, um zu sehen, ob es funktioniert.
 
 <details>
@@ -207,7 +186,7 @@ export class OrderCard {
 
   isFinished = computed(() => {
     const currentStatus = this.displayOrder().status;
-    return currentStatus === OrderStatus.Delivered || currentStatus === OrderStatus.Cancelled;
+    return currentStatus === OrderStatus.DELIVERED || currentStatus === OrderStatus.CANCELED;
   });
 
   // ...
@@ -220,6 +199,29 @@ export class OrderCard {
 <div class="card-footer">
   <p>Ist abgeschlossen: {{ isFinished() }}</p>
 </div>
+```
+
+```css
+.card-footer {
+    /*
+     * Eine feine Linie trennt den Body vom Footer, ähnlich wie beim Header.
+     * Das sorgt für eine klare visuelle Gliederung.
+     */
+    border-top: 1px solid #e0e0e0;
+    padding: 0.75rem 1rem; /* Etwas weniger vertikales Padding als im Body/Header. */
+    background-color: #f8f9fa; /* Die gleiche helle Hintergrundfarbe wie im Header für Konsistenz. */
+    text-align: right; /* Richtet den Inhalt rechts aus, oft nützlich für Aktionen oder Status-Flags. */
+}
+
+/*
+ * Spezifisches Styling für den Paragraphen innerhalb des Footers.
+ */
+.card-footer p {
+    margin: 0; /* Entfernt den Standard-Außenabstand des Paragraphen. */
+    font-size: 0.85rem; /* Etwas kleinerer Text für sekundäre Informationen. */
+    font-style: italic; /* Kursivschrift, um den informativen Charakter zu betonen. */
+    color: #6c757d; /* Ein gedämpftes Grau, da es sich um eine Metainformation handelt. */
+}
 ```
 
 </details>

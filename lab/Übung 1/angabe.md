@@ -2,7 +2,7 @@
 
 **Ziel:** In dieser Übung werden wir die Grundlagen von Angular-Komponenten in der Praxis anwenden. Wir erstellen eine neue Seiten-Komponente, schachteln unsere bestehende `OrderCard` darin und geben beiden ein sauberes, statisches Layout und Styling. Das Ziel ist es, ein Gefühl für den Aufbau und das Zusammenspiel von Komponenten zu bekommen.
 
-**Voraussetzungen:** Ihr Projekt befindet sich auf dem Stand nach der CLI-Übung (Übung 0.2). Der Entwicklungsserver (`ng serve`) kann gestartet werden.
+**Voraussetzungen:** Ihr Projekt befindet sich auf dem Stand nach der CLI-Übung (Übung 0.2).
 
 -----
 
@@ -77,7 +77,7 @@ Strukturieren Sie das Template so, dass es die Informationen einer Bestellung an
   <span>Status: Shipped</span>
 </div>
 <div class="card-body">
-  <p>Kunde: ACME Corporation</p>
+  <p>Kunde: Manner GmbH</p>
   <p>Betrag: 299,95 €</p>
 </div>
 ```
