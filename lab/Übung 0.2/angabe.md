@@ -2,7 +2,7 @@
 
 **Ziel:** In dieser Übung festigen wir den Umgang mit der Angular CLI, unserem wichtigsten Werkzeug. Wir werden Code-Strukturen generieren, den Entwicklungsserver nutzen und einen produktiven Build unserer Anwendung erstellen.
 
-**Voraussetzungen:** Übung 0.1 ist abgeschlossen.
+**Voraussetzungen:** Übung 0.1 ist abgeschlossen. Frontend Dev-Server ist gestoppt.
 
 -----
 
@@ -17,6 +17,7 @@ Wir benötigen eine Komponente, die später eine einzelne Bestellkarte anzeigen 
 **Aktion:** Führen Sie im Terminal den folgenden Befehl aus, um eine Komponente namens `order-card` im Verzeichnis `src/app/component` zu erstellen:
 
 ```bash
+# Im Ordner /frontend
 ng generate component component/order-card
 ```
 
@@ -36,18 +37,18 @@ ng generate enum model/OrderStatus
 
 *Kurzform: `ng g enum model/OrderStatus`*
 
-**Implementierung:** Öffnen Sie die neu erstellte Datei `src/app/model/order-status.enum.ts` und befüllen Sie das Enum mit den folgenden Werten: `Pending`, `Confirmed`, `Shipped`, `Cancelled`.
+**Implementierung:** Öffnen Sie die neu erstellte Datei `src/app/model/order-status.enum.ts` und befüllen Sie das Enum mit den folgenden Werten: `Pending`, `Processing`, `Shipped`, `Delivered`, `Cancelled`.
 
 #### **1.3 Das `Order`-Interface anpassen**
 
 Jetzt bringen wir unser `Order`-Interface auf den neuesten Stand, damit es das neue `OrderStatus`-Enum verwendet.
 
-**Aktion:** Öffnen Sie die Datei, in der Ihr `Order`-Interface definiert ist (wahrscheinlich `src/app/model/order.model.ts` oder ähnlich).
+**Aktion:** Öffnen Sie die Datei, in der Ihr `Order`-Interface definiert ist (wahrscheinlich `src/app/model/order.ts` oder ähnlich).
 
 **Implementierung:**
 
 1.  Importieren Sie das `OrderStatus`-Enum am Anfang der Datei.
-2.  Ändern Sie den Typ der Eigenschaft `status` von `string` auf `OrderStatus`.
+2.  Ändern Sie den Typ der Eigenschaft `status` auf `OrderStatus`.
 
 Das Ergebnis für die `status`-Eigenschaft sollte so aussehen:
 `status: OrderStatus;`
@@ -64,7 +65,7 @@ ng generate service service/OrderService
 
 *Kurzform: `ng g s service/OrderService`*
 
-**Implementierung:** Öffnen Sie die neue Datei `src/app/service/order.ts` und nehmen Sie folgende Änderungen vor:
+**Implementierung:** Öffnen Sie die neue Datei `src/app/service/order-service.ts` und nehmen Sie folgende Änderungen vor:
 
 1.  Fügen Sie im `constructor()` eine `console.log()`-Anweisung hinzu, die die Nachricht "OrderService initialized" ausgibt.
 2.  Erstellen Sie eine neue, leere Methode namens `getOrders()`. Fügen Sie innerhalb dieser Methode eine `console.log()`-Anweisung hinzu, die "Fetching orders..." ausgibt.
@@ -100,7 +101,7 @@ Dieser Prozess kann einen Moment dauern. Die CLI kompiliert Ihren Code, optimier
 **Überprüfung:**
 
 1.  Nachdem der Befehl abgeschlossen ist, sehen Sie in Ihrem Projekt einen neuen Ordner namens `dist/`.
-2.  Öffnen Sie diesen Ordner und sehen Sie sich den Inhalt an. Sie finden dort die `index.html` sowie einige JavaScript- und CSS-Dateien mit kryptischen Namen. Dies sind die optimierten Dateien, die Sie auf einen Webserver hochladen würden.
+2.  Öffnen Sie diesen Ordner und sehen Sie sich den Inhalt an. Sie finden dort die `index.html` sowie einige JavaScript- und CSS-Dateien. Dies sind die von Angular optimierten Dateien, die Sie auf einen Webserver hochladen würden.
 
 -----
 
