@@ -1,6 +1,6 @@
 ### **Übung 5: `HttpClient` Setup & der erste Backend-Request**
 
-**Ziel:** In dieser Übung verbessern wir die Architektur unserer Anwendung fundamental. Zuerst lagern wir die Datenlogik aus unserer `DashboardPage` in den `OrderService` aus und nutzen Dependency Injection. Danach bereiten wir den Service auf echte Backend-Kommunikation vor, indem wir den `HttpClient` konfigurieren und injizieren.
+**Ziel:** In dieser Übung verbessern wir die Architektur unserer Anwendung fundamental. Zuerst lagern wir die Datenlogik aus unserer `DashboardPage` in den `OrderService` aus. Danach bereiten wir den Service auf echte Backend-Kommunikation vor, indem wir den `HttpClient` konfigurieren und injizieren.
 
 **Voraussetzungen:** Ihr Projekt ist auf dem Stand der Übung 4. Das Backend ist gestartet (`npm start`).
 
@@ -8,7 +8,7 @@
 
 ### **Aufgabe 1: Den `HttpClient` aufsetzen und im `OrderService` einbinden**
 
-Der letzte Schritt ist, unseren `OrderService` mit der Fähigkeit auszustatten, HTTP-Anfragen zu stellen.
+Hier statten wir unseren `OrderService` mit der Fähigkeit aus, HTTP-Anfragen zu stellen.
 
 **Angabe:**
 
@@ -18,6 +18,18 @@ Der letzte Schritt ist, unseren `OrderService` mit der Fähigkeit auszustatten, 
 <details>
 <summary>Lösungshinweis</summary>
 
+**`app.config.ts`:**
+
+```typescript
+export const appConfig: ApplicationConfig = {
+  providers: [
+    //...
+    provideHttpClient(),
+  ]
+};
+```
+**`order-service.ts`:**
+
 ```typescript
 
 @Injectable({
@@ -26,10 +38,6 @@ Der letzte Schritt ist, unseren `OrderService` mit der Fähigkeit auszustatten, 
 export class OrderService {
   // HttpClient injizieren
   private http = inject(HttpClient);
-
-  private orders: Order[] = [
-    // ... Mock-Daten bleiben vorerst hier ...
-  ];
 
   constructor() {}
 
@@ -56,10 +64,12 @@ Jetzt bringen wir unserem `OrderService` bei, wie man mit dem Backend spricht.
 <details>
 <summary>Lösungshinweis</summary>
 
+**`order-service.ts`:**
+
 ```typescript
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs'; // Importieren
+import { Observable } from 'rxjs';
 import { Order } from '../model/order.model';
 
 @Injectable({
@@ -67,16 +77,11 @@ import { Order } from '../model/order.model';
 })
 export class OrderService {
   private http = inject(HttpClient);
-  // 1. API-URL definieren
   private apiUrl = 'http://localhost:3000/orders';
-
-  // 2. Das statische Array wurde gelöscht.
 
   constructor() {}
 
-  // 3. Die Methode gibt jetzt ein Observable zurück
   getOrders(): Observable<Order[]> {
-    // 4. Der GET-Request wird ausgeführt
     return this.http.get<Order[]>(this.apiUrl);
   }
 }
@@ -98,32 +103,20 @@ Jetzt, da der Service die Daten bereitstellt, muss die `DashboardPage` ihn nur n
 <details>
 <summary>Lösungshinweis</summary>
 
+**`dashboard-page.ts`:**
+
 ```typescript
 @Component({ /* ... */ })
 export class DashboardPage {
-  // Service injizieren
+  orders = signal<Order[]>([]);
+
   private orderService = inject(OrderService);
-  orders$!: Observable<Order[]>;
-  
-  private userService = inject(UserService);
-  constructor(): void {
-    this.orders$ = this.userService.getUser(this.userId());
-  }
-  
-  selectedOrder = signal<Order | undefined>(undefined);
 
-  // Der Rest der Klasse (selectOrder, selectionSummary etc.) bleibt unverändert.
-  selectOrder(order: Order): void {
-    this.selectedOrder.set(order);
+  constructor() {
+    this.orderService.getOrders().subscribe(orders => {
+      this.orders.set(orders);
+    });
   }
-
-  selectionSummary = computed(() => {
-    const selected = this.selectedOrder();
-    if (selected) {
-      return `Ausgewählt: Bestellung #${selected.id} von ${selected.customerName}`;
-    }
-    return 'Keine Bestellung ausgewählt.';
-  });
 }
 ```
 
@@ -136,3 +129,4 @@ export class DashboardPage {
 Starten Sie die Anwendung.
 
 * Sie sollten nun eine Liste aller Bestellungen sehen, die im Backend gespeichert sind.
+* Stoppen Sie das Backend. Nach Page-Reload sollte folgender Text angezeigt werden: "Es sind aktuell keine Bestellungen zur Anzeige verfügbar."
