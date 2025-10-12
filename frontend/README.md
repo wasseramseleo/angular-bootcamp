@@ -34,7 +34,7 @@ Dieses Projekt folgt der Standardstruktur der Angular CLI, wurde jedoch um einig
     -   `model/`: Enthält TypeScript Interfaces und Typ-Definitionen, die die Daten unserer Anwendung modellieren.
         -   `order.ts`: Definiert das `Order` Interface.
     -   `service/`: Enthält `injectable` Services, die Geschäftslogik, Datenzugriff und andere geteilte Funktionalitäten behandeln.
-        -   `order.service.ts`: Ein Platzhalter-Service für die Verwaltung der Bestelldaten.
+        -   `order.ts`: Ein Platzhalter-Service für die Verwaltung der Bestelldaten.
 
 ### Kerndateien
 
