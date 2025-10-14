@@ -22,8 +22,8 @@ Wir beginnen damit, den lokalen Zustand unserer `DashboardPage` reaktiv zu mache
 
 ```typescript
 import { Component, signal } from '@angular/core';
-import { Order } from '../../model/order.model';
-import { OrderStatus } from '../../model/order-status.enum';
+import { Order } from '../../model/order';
+import { OrderStatus } from '../../model/order-status';
 // ... andere imports
 
 @Component({ /* ... */ })
@@ -116,8 +116,8 @@ Jetzt bereiten wir die `OrderCard` darauf vor, Daten als Signal zu empfangen. Da
 
 ```typescript
 import { Component, computed, input } from '@angular/core';
-import { Order } from '../../model/order.model';
-import { OrderStatus } from '../../model/order-status.enum';
+import { Order } from '../../model/order';
+import { OrderStatus } from '../../model/order-status';
 
 @Component({ /* ... */ })
 export class OrderCard {

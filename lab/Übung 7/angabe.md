@@ -231,7 +231,7 @@ Jetzt bilden wir die Struktur unserer `Order` in der Komponenten-Klasse als `For
 import { Component, inject } from '@angular/core';
 // ...
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { OrderStatus } from '../../model/order-status.enum';
+import { OrderStatus } from '../../model/order-status';
 
 @Component({ /* ... */ })
 export class AddOrderPage {
@@ -285,7 +285,7 @@ Jetzt sorgen wir dafür, dass die eingegebenen Daten beim Klick auf "Speichern" 
 
 **Angabe:**
 
-1.  Öffnen Sie zuerst `src/app/service/order.service.ts`. Erstellen Sie eine neue Methode `saveOrder`, die ein `Order`-Objekt entgegennimmt. Diese Methode soll einen HTTP `POST`-Request an die Basis-API-URL (`/orders`) senden und ein `Observable<Order>` zurückgeben.
+1.  Öffnen Sie zuerst `src/app/service/order.ts`. Erstellen Sie eine neue Methode `saveOrder`, die ein `Order`-Objekt entgegennimmt. Diese Methode soll einen HTTP `POST`-Request an die Basis-API-URL (`/orders`) senden und ein `Observable<Order>` zurückgeben.
 2.  Öffnen Sie `add-order-page.ts`. Erstellen Sie eine `onSubmit()`-Methode.
 3.  Binden Sie diese `onSubmit()`-Methode im Template an das `(ngSubmit)`-Event des `<form>`-Tags.
 4.  Implementieren Sie die `onSubmit()`-Methode: Sie soll die `saveOrder`-Methode Ihres `OrderService` aufrufen und ihr die aktuellen Werte aus dem Formular (`this.orderForm.value`) übergeben.
@@ -294,11 +294,11 @@ Jetzt sorgen wir dafür, dass die eingegebenen Daten beim Klick auf "Speichern" 
 <details>
 <summary>Lösungshinweis</summary>
 
-**`order.service.ts`:**
+**`order.ts`:**
 
 ```typescript
 // ... imports
-import { Order } from '../model/order.model';
+import { Order } from '../model/order';
 
 @Injectable({ /* ... */ })
 export class OrderService {
@@ -316,7 +316,7 @@ export class OrderService {
 ```typescript
 // ... imports
 import { Router } from '@angular/router';
-import { OrderService } from '../../service/order.service';
+import { OrderService } from '../../service/order';
 
 @Component({ /* ... */ })
 export class AddOrderPage {
