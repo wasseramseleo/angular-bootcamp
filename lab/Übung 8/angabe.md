@@ -56,7 +56,7 @@ export class OrderList { /* ... */ }
 
 ```typescript
 import { Directive, input } from '@angular/core';
-import { OrderStatus } from '../model/order-status.enum';
+import { OrderStatus } from '../model/order-status';
 
 @Directive({
   selector: '[appStatusBorder]',
@@ -102,7 +102,7 @@ Jetzt implementieren wir die Kernlogik. Die Direktive muss auf Maus-Events lausc
 
 ```typescript
 import { Directive, ElementRef, inject, input } from '@angular/core';
-import { OrderStatus } from '../model/order-status.enum';
+import { OrderStatus } from '../model/order-status';
 
 @Directive({
   selector: '[appStatusBorder]',

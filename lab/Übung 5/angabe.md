@@ -70,7 +70,7 @@ Jetzt bringen wir unserem `OrderService` bei, wie man mit dem Backend spricht.
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Order } from '../model/order.model';
+import { Order } from '../model/order';
 
 @Injectable({
   providedIn: 'root',

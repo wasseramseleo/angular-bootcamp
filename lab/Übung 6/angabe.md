@@ -12,7 +12,7 @@ Bisher kann unser Service nur die gesamte Liste an Bestellungen abrufen. Für ei
 
 **Angabe:**
 
-1.  Öffnen Sie `src/app/service/order.service.ts`.
+1.  Öffnen Sie `src/app/service/order.ts`.
 2.  Erstellen Sie eine neue, öffentliche Methode namens `getOrderById`, welche eine `id` als Parameter akzeptieren (vom Typ `string` oder `number`). 
 3. Die Methode soll ein `Observable<Order>` zurückgeben. 
 4. Implementieren Sie die Methode so, dass sie einen HTTP `GET`-Request an den spezifischen Endpunkt für eine einzelne Bestellung sendet (z.B. `http://localhost:3000/orders/101`). Nutzen Sie dazu Template-Literale, um die ID in die `apiUrl` einzufügen.
@@ -24,7 +24,7 @@ Bisher kann unser Service nur die gesamte Liste an Bestellungen abrufen. Für ei
 
 ```typescript
 // ... imports
-import { Order } from '../model/order.model';
+import { Order } from '../model/order';
 
 @Injectable({
   providedIn: 'root',
@@ -71,8 +71,8 @@ Diese neue Komponente wird für die Anzeige der Details einer einzelnen, über d
 ```typescript
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Order } from '../../model/order.model';
-import { OrderService } from '../../service/order.service';
+import { Order } from '../../model/order';
+import { OrderService } from '../../service/order';
 
 @Component({
   selector: 'app-order-detail-page',
